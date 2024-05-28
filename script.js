@@ -16,10 +16,11 @@ It also checks on the amount of turns screen left. */
 
 function checkGuess() {
     const userGuess = Number(guessField.value);
-    if (guessCount === 1) {
-        guesses.textContent = "Previous Guesses: ";
-    }
-    guesses.textContent = '${guesses.textContent} ${userGuess}';
+
+    if(guessCount === 1) {
+        guesses.textContent = "Previous guesses: ";
+      }
+      guesses.textContent = `${guesses.textContent} ${userGuess}`;
 
     if (userGuess === randomNumber){
         lastResult.textContent = "Congratulations! You Got It Right!";
@@ -29,7 +30,8 @@ function checkGuess() {
 
     }else if(guessCount === 10){
         lastResult.textContent = "Game Over!!";
-        lowOrHi.textContent = " ";
+        lastResult.style.backgroundColor
+        lowOrHi.textContent = "purple";
         setGameOver();
     }else{
         lastResult.textContent = "Wrong! Try Again!";
@@ -38,10 +40,42 @@ function checkGuess() {
     if(userGuess > randomNumber){
         lowOrHi.textContent = "The number was too high.";
     }else if(userGuess < randomNumber){
-        lowOrHi,textContent = "The number was too low.";
+        lowOrHi.textContent = "The number was too low.";
     }
 }
 
 guessCount++;
 guessField.value = " ";
 guessField.focus();
+
+guessSubmit.addEventListener("click" , checkGuess);
+
+//This function allows the user to restart the game.
+function setGameOver() {
+    guessField.disabled = true;
+    guessSubmit.disabled =true;
+    resetButtton = document.createElement("button");
+    resetButtton.textContent = "Start New Game";
+    document.body.appendChild(resetButton);
+    resetButton.addEventListener("click" , resetGame);
+}
+
+//This function that resets everything by clearing the paragraph elements
+function resetGame() {
+    guessCount = 1;
+
+    const resetParas = document.querySelector(".resetParas");
+    for (const resetPara of resetParas) {
+        resetPara.textContent = " ";
+    }
+    resetButton.parentNode.removeChild(resetButton);
+
+    guessField.disabled = false;
+    guessSubmit.disabled = false;
+    guessField.value = " ";
+    guessField.focus();
+
+    lastResult.style.backgroundColor = "white";
+
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+}
