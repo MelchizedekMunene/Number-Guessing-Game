@@ -10,17 +10,17 @@ const guessSubmit = document.querySelector(".guessSubmit");
 
 let guessCount = 1;
 let resetButtton;
+guessField.focus();
 
 /*Function that checks out the user`s guess with the correct answer and provides output.
-It also checks on the amount of turns screen left. */
-
+It also checks on the amount of turns left. */
 function checkGuess() {
     const userGuess = Number(guessField.value);
 
     if(guessCount === 1) {
         guesses.textContent = "Previous guesses: ";
       }
-      guesses.textContent = `${guesses.textContent} ${userGuess}`;
+      guesses.textContent = `${"Previous Guesses: "} ${userGuess}`;
 
     if (userGuess === randomNumber){
         lastResult.textContent = "Congratulations! You Got It Right!";
@@ -45,7 +45,7 @@ function checkGuess() {
 }
 
 guessCount++;
-guessField.value = " ";
+guessField.value = "";
 guessField.focus();
 
 guessSubmit.addEventListener("click" , checkGuess);
@@ -60,11 +60,11 @@ function setGameOver() {
     resetButton.addEventListener("click" , resetGame);
 }
 
-//This function that resets everything by clearing the paragraph elements
+//This function that resets everything by clearing the paragraph elements and generating a new random number.
 function resetGame() {
     guessCount = 1;
 
-    const resetParas = document.querySelector(".resetParas");
+    const resetParas = document.querySelector(".resetParas p");
     for (const resetPara of resetParas) {
         resetPara.textContent = " ";
     }
@@ -74,8 +74,6 @@ function resetGame() {
     guessSubmit.disabled = false;
     guessField.value = " ";
     guessField.focus();
-
     lastResult.style.backgroundColor = "white";
-
     randomNumber = Math.floor(Math.random() * 100) + 1;
 }
