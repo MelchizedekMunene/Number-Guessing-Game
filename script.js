@@ -1,7 +1,7 @@
-//This mathematical algorithm generates the random number 
+//This mathematical algorithm generates the random number. 
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 
-//These are the variables required in order for the function to work
+//These are the variables required in order for the function to work.
 const guesses = document.querySelector(".guesses");
 const lastResult = document.querySelector(".lastResult");
 const lowOrHi = document.querySelector(".lowOrHi");
@@ -10,7 +10,10 @@ const guessSubmit = document.querySelector(".guessSubmit");
 
 let guessCount = 1;
 let resetButton;
+
+//This is an array that stores previous guesses
 let previousGuesses = [];
+
 guessField.focus();
 
 /*Function that checks out the user`s guess with the correct answer and provides output.
@@ -59,7 +62,7 @@ function setGameOver() {
     resetButton.addEventListener("click" , resetGame);
 }
 
-//This function that resets everything by clearing the paragraph elements and generating a new random number.
+//This function resets everything by clearing the paragraph elements and generating a new random number.
 function resetGame() {
     guessCount = 1;
     previousGuesses = [];
